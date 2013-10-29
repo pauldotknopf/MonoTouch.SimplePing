@@ -1,0 +1,3 @@
+[submodule "SubModules/SimplePing-Universal"]
+	path = SubModules/SimplePing-Universal
+	url = https://github.com/theonlylawislove/SimplePing-Universal.git
