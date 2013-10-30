@@ -101,7 +101,12 @@ namespace MonoTouch.SimplePing.Test
 			if (!_completed)
 				throw new InvalidOperationException ("You must wait until the current ping is completed.");
 			_completed = false;
-			_pinger.Start ();
+			if (NSThread.IsMain)
+				_pinger.Start ();
+			else
+				NSThread.MainThread.InvokeOnMainThread (new NSAction (() => {
+					_pinger.Start();
+				}));
 			// start the timeout
 			Task.Factory.StartNew (state => {
 				System.Threading.Thread.Sleep((state as SimplePingHelper).Timeout);
